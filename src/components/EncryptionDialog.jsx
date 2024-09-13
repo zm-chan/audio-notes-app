@@ -44,7 +44,12 @@ function EncryptionDialog({
             <Label htmlFor="secret-key" className="text-right">
               Secret Key
             </Label>
-            <Input id="secret-key" className="col-span-3" ref={inputRef} />
+            <Input
+              id="secret-key"
+              className="col-span-3"
+              ref={inputRef}
+              autocomplete="off"
+            />
           </div>
         </div>
         <DialogFooter>

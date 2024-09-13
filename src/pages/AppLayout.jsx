@@ -4,7 +4,7 @@ import SidebarButtonsRow from "@/components/SidebarButtonsRow";
 import NoteList from "@/components/NoteList";
 import { useSelectedNote } from "@/context/SelectedNoteContext";
 import { Toaster } from "@/components/ui/toaster";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 function AppLayout() {
@@ -16,6 +16,19 @@ function AppLayout() {
       return !prevToggle;
     });
   }
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = ""; // This triggers the confirmation dialog in modern browsers
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <>

@@ -54,12 +54,14 @@ function Login() {
           name="email"
           type="email"
           placeholder="Email"
+          autocomplete="off"
           className="h-9 border-zinc-400 bg-transparent text-sm text-zinc-300 ring-offset-zinc-400 focus-visible:ring-transparent sm:py-5 sm:text-base lg:h-12 lg:text-lg"
         />
         <Input
           name="password"
           type="password"
           placeholder="Password"
+          autocomplete="off"
           className="h-9 border-zinc-400 bg-transparent text-sm text-zinc-300 ring-offset-zinc-400 focus-visible:ring-transparent sm:py-5 sm:text-base lg:h-12 lg:text-lg"
         />
         <Button
