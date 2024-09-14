@@ -32,7 +32,7 @@ function AppLayout() {
 
   return (
     <>
-      <main className="grid grid-cols-[auto_auto] sm:grid-cols-[auto_1fr]">
+      <main className="grid h-screen grid-cols-[auto_auto] overflow-hidden sm:grid-cols-[auto_1fr]">
         <Sidebar
           className={cn(
             "-ml-64 w-64 overflow-y-auto border-r bg-zinc-900 transition-all duration-300 ease-in-out xs:-ml-80 xs:w-80 sm:ml-0 sm:w-80",
@@ -45,7 +45,7 @@ function AppLayout() {
           <NoteList selectNote={selectNote} selectedNoteId={selectedNoteId} />
         </Sidebar>
         <Content
-          className="w-screen bg-zinc-800 sm:w-auto"
+          className="w-screen overflow-y-auto bg-zinc-800 sm:w-auto"
           selectedNoteId={selectedNoteId}
           handleToggleSidebar={handleToggleSidebar}
         />
