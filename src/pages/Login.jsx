@@ -42,7 +42,7 @@ function Login() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-zinc-800">
+    <main className="flex min-h-svh items-center justify-center bg-zinc-800">
       <form
         onSubmit={handleSubmit}
         className="grid w-5/6 max-w-xs gap-y-5 rounded-2xl bg-zinc-700 px-4 py-6 text-center sm:max-w-sm sm:gap-y-7 sm:px-6 sm:py-8 lg:max-w-md lg:px-8 lg:py-10"

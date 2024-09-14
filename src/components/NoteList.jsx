@@ -2,12 +2,8 @@ import Note from "./Note";
 import useFetchNotes from "@/hooks/useFetchNotes";
 import Loader from "./Loader";
 
-function NoteList({ selectNote, selectedNoteId }) {
+function NoteList({ handleSelectNote, selectedNoteId }) {
   const { isLoading, error, notesData = [] } = useFetchNotes();
-
-  function handleSetSelection(noteId) {
-    selectNote(noteId);
-  }
 
   if (isLoading) {
     return (
@@ -45,7 +41,7 @@ function NoteList({ selectNote, selectedNoteId }) {
             key={note.id}
             note={note}
             onClick={() => {
-              handleSetSelection(note.id);
+              handleSelectNote(note.id);
             }}
             isActive={note.id === selectedNoteId}
           />
