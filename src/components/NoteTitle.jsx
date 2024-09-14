@@ -54,7 +54,7 @@ function NoteTitle({ noteId, noteTitle }) {
       onBlur={handleBlur}
       onChange={handleChange}
       readOnly={!isFocused}
-      autocomplete="off"
+      autoComplete="off"
       className={cn(
         "max-w-[60vw] overflow-x-auto rounded-none border-0 bg-transparent text-lg font-medium text-white caret-white focus-visible:border-b focus-visible:border-zinc-300 focus-visible:ring-0 focus-visible:ring-offset-0 md:overflow-visible",
       )}

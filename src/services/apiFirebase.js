@@ -131,6 +131,12 @@ export async function deleteSelectedNote(noteId) {
   await setDoc(metaDataRef, { notes: newNotesData });
 }
 
+function removeRange(str, start, end) {
+  const removed = str.slice(start, end);
+  const newStr = str.slice(end + 1);
+  return { removed, newStr };
+}
+
 export async function getContent(noteId) {
   const metaDataDocSnap = await getDoc(metaDataRef);
   let { notes: notesData } = metaDataDocSnap.data();
@@ -151,19 +157,53 @@ export async function getContent(noteId) {
   }
 
   const textContentObj = textContentSections.map((section) => {
-    const regex =
-      /### Note ID: (\d+)\nCreated At: (\d+)\nEncrypted: (true|false)\nAudio ID: *(.*?)\n([\s\S]*?)(?=\n|$)/;
+    const { removed: removedId, newStr: newStrAfterId } = removeRange(
+      section,
+      0,
+      section.indexOf("\n", 0),
+    );
 
-    const match = section.match(regex);
+    const id = removedId.split("### Note ID: ")[1];
 
-    const [, id, createdAt, encrypted, audioId, textValue] = match;
+    const { removed: removedCreatedAt, newStr: newStrAfterCreatedAt } =
+      removeRange(
+        newStrAfterId,
+        newStrAfterId.indexOf("Created At: "),
+        newStrAfterId.indexOf("\n", newStrAfterId.indexOf("Created At: ")),
+      );
 
+    const createdAt = removedCreatedAt.split("Created At: ")[1];
+
+    const { removed: removedEncrypted, newStr: newStrAfterEncrypted } =
+      removeRange(
+        newStrAfterCreatedAt,
+        newStrAfterCreatedAt.indexOf("Encrypted: "),
+        newStrAfterCreatedAt.indexOf(
+          "\n",
+          newStrAfterCreatedAt.indexOf("Encrypted: "),
+        ),
+      );
+
+    const encrypted = removedEncrypted.split("Encrypted: ")[1];
+
+    const { removed: removedAudioId, newStr: newStrAfterAudioId } = removeRange(
+      newStrAfterEncrypted,
+      newStrAfterEncrypted.indexOf("Audio ID: "),
+      newStrAfterEncrypted.indexOf(
+        "\n",
+        newStrAfterEncrypted.indexOf("Audio ID: "),
+      ),
+    );
+
+    const audioId = removedAudioId.split("Audio ID: ")[1];
+
+    // Create the object
     const noteObject = {
-      id: id.trim(),
-      createdAt: createdAt.trim(),
-      encrypted: encrypted.trim() === "true",
-      audioId: audioId.trim(),
-      textValue: textValue.trim(),
+      id,
+      createdAt,
+      encrypted,
+      audioId,
+      textValue: newStrAfterAudioId,
     };
 
     return noteObject;

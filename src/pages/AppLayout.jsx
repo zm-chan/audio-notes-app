@@ -32,10 +32,10 @@ function AppLayout() {
 
   return (
     <>
-      <main className="grid h-screen grid-cols-[auto_auto] sm:grid-cols-[auto_1fr]">
+      <main className="grid grid-cols-[auto_auto] sm:grid-cols-[auto_1fr]">
         <Sidebar
           className={cn(
-            "xs:-ml-80 xs:w-80 -ml-64 w-64 border-r bg-zinc-900 transition-all duration-300 ease-in-out sm:ml-0 sm:w-80",
+            "-ml-64 w-64 overflow-y-auto border-r bg-zinc-900 transition-all duration-300 ease-in-out xs:-ml-80 xs:w-80 sm:ml-0 sm:w-80",
             {
               "!ml-0": toggleSidebar,
             },

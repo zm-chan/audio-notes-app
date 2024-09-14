@@ -48,7 +48,7 @@ function EncryptionDialog({
               id="secret-key"
               className="col-span-3"
               ref={inputRef}
-              autocomplete="off"
+              autoComplete="off"
             />
           </div>
         </div>
