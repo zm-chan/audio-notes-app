@@ -32,10 +32,19 @@ function ContentActionsRow({
         <NoteTitle noteId={noteId} noteTitle={noteTitle} />
       </div>
       <div className="hidden items-center justify-evenly gap-3 md:flex">
-        <NewAudioContentButton onClick={handleAddNewAudioContent} />
-        <NewTextContentButton onClick={handleAddNewTextContent} />
+        <NewAudioContentButton
+          onClick={handleAddNewAudioContent}
+          disabled={isEditing}
+        />
+        <NewTextContentButton
+          onClick={handleAddNewTextContent}
+          disabled={isEditing}
+        />
         <SaveButton onClick={handleSaveContent} disabled={isEditing} />
-        <DeleteContentButton onClick={handleDeleteContent} />
+        <DeleteContentButton
+          onClick={handleDeleteContent}
+          disabled={isEditing}
+        />
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild className="md:hidden">
@@ -43,16 +52,25 @@ function ContentActionsRow({
         </DropdownMenuTrigger>
         <DropdownMenuContent className="flex bg-zinc-800 p-0 shadow-none focus:[&>div]:bg-transparent">
           <DropdownMenuItem>
-            <NewAudioContentButton onClick={handleAddNewAudioContent} />
+            <NewAudioContentButton
+              onClick={handleAddNewAudioContent}
+              disabled={isEditing}
+            />
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <NewTextContentButton onClick={handleAddNewTextContent} />
+            <NewTextContentButton
+              onClick={handleAddNewTextContent}
+              disabled={isEditing}
+            />
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <SaveButton onClick={handleSaveContent} />
+            <SaveButton onClick={handleSaveContent} disabled={isEditing} />
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <DeleteContentButton onClick={handleDeleteContent} />
+            <DeleteContentButton
+              onClick={handleDeleteContent}
+              disabled={isEditing}
+            />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
