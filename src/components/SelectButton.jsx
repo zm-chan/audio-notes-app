@@ -3,7 +3,7 @@ import BaseButton from "./BaseButton";
 
 function SelectButton({ selected, ...props }) {
   return (
-    <BaseButton {...props}>
+    <BaseButton {...props} message="Select Note">
       {selected ? <SquareCheck /> : <Square />}
     </BaseButton>
   );
