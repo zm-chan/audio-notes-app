@@ -23,7 +23,7 @@ function NoteTitle({ noteId, noteTitle }) {
   const handleBlur = () => {
     setIsFocused(false);
 
-    if (value !== noteTitle.split(".")[0]) {
+    if (value !== noteTitle) {
       editNoteTitle(
         { noteId: noteId, title: value },
         {
