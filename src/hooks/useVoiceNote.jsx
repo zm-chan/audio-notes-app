@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useToast } from "./use-toast";
 
 function punctuationReplacement(language, transcript) {
   if (language === "en-GB") {
@@ -48,6 +49,8 @@ function useVoiceNote(language) {
   const recognitionRef = useRef(null);
   const audioFileRef = useRef(null);
 
+  const { toast } = useToast();
+
   // console.log(transcript, interimScript);
 
   useEffect(() => {
@@ -69,7 +72,12 @@ function useVoiceNote(language) {
           chunksRef.current = []; // Reset chunks
         };
       })
-      .catch((error) => console.error("Error accessing microphone:", error));
+      .catch((error) =>
+        toast({
+          title: "Error accessing microphone:",
+          description: error.message,
+        }),
+      );
 
     // Setup SpeechRecognition
     recognitionRef.current = new (window.SpeechRecognition ||
@@ -110,11 +118,11 @@ function useVoiceNote(language) {
         recognitionRef.current.onresult = null;
       }
     };
-  }, [language]);
+  }, [language, toast]);
 
   const startRecording = () => {
     if (!mediaRecorderRef.current || !recognitionRef.current) {
-      alert("Initialization failed.");
+      toast({ title: "Error", description: "Audio initialization failed." });
       return;
     }
 
@@ -136,10 +144,18 @@ function useVoiceNote(language) {
     if (recognitionRef.current) {
       recognitionRef.current.stop();
     }
+
     setIsRecording(false);
   };
 
   const stopRecording = () => {
+    if (!transcript) {
+      return toast({
+        title: "Start Recording",
+        description: "No recording process can be stopped!",
+      });
+    }
+
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
     }
