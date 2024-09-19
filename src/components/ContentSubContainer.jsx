@@ -5,6 +5,7 @@ import { useSelectedNote } from "@/context/SelectedNoteContext";
 import useSaveNoteContent from "@/hooks/useSaveNoteContent";
 import { checkAudioSupport } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import ScrollToTopButton from "./ScrollToTopButton";
 
 function ContentSubContainer({ noteContent, handleToggleSidebar }) {
   const [temperoraryContent, setTemperoraryContent] = useState(
@@ -242,6 +243,7 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
         handleAddNewAudioTextContent={handleAddNewAudioTextContent}
         isEditing={isEditing}
       />
+      <ScrollToTopButton />
     </>
   );
 }

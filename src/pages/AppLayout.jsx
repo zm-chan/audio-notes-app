@@ -40,7 +40,7 @@ function AppLayout() {
       <main className="grid h-svh grid-cols-[auto_auto] overflow-hidden sm:grid-cols-[auto_1fr]">
         <Sidebar
           className={cn(
-            "-ml-64 w-64 overflow-y-auto border-r bg-zinc-900 transition-all duration-300 ease-in-out xs:-ml-80 xs:w-80 sm:ml-0 sm:w-80",
+            "-ml-64 w-64 border-r bg-zinc-900 transition-all duration-300 ease-in-out xs:-ml-80 xs:w-80 sm:ml-0 sm:w-80",
             {
               "!ml-0": toggleSidebar,
             },
@@ -53,7 +53,7 @@ function AppLayout() {
           />
         </Sidebar>
         <Content
-          className="w-screen overflow-y-auto bg-zinc-800 sm:w-auto"
+          className="w-screen bg-zinc-800 sm:w-auto"
           selectedNoteId={selectedNoteId}
           handleToggleSidebar={handleToggleSidebar}
         />
