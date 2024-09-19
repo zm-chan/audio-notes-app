@@ -50,24 +50,24 @@ function VoiceSetup({
   return (
     <div className="flex flex-col gap-3">
       {!doneRecording && (
-        <div className="flex gap-3">
+        <div className="flex flex-col flex-wrap gap-3 md:flex-row">
           <SelectButton
             selected={eachContent.selected}
             onClick={handleSelectAudio}
           />
           <SelectLanguage
             handleSelectLanguage={setLanguage}
-            className="w-auto"
+            className="w-auto max-w-xs"
           />
           <Button
             onClick={isRecording ? pauseRecording : startRecording}
-            className="self-start bg-zinc-200 text-black hover:bg-zinc-200/90"
+            className="max-w-xs bg-zinc-200 text-black hover:bg-zinc-200/90 md:self-start"
           >
             {isRecording ? "Pause Recording ⏸️" : "Start Recording 🎙️"}
           </Button>
           <Button
             onClick={stopRecording}
-            className="self-start bg-zinc-200 text-black hover:bg-zinc-200/90"
+            className="max-w-xs bg-zinc-200 text-black hover:bg-zinc-200/90 md:self-start"
           >
             Stop Recording 🛑
           </Button>
