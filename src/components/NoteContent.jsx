@@ -18,7 +18,7 @@ function NoteContent({
 
   useEffect(() => {
     if (bottomRef.current) {
-      bottomRef.current.scrollIntoView({ behavior: "smooth" });
+      bottomRef.current.scrollIntoView({ behavior: "instant" });
     }
   }, [selectedNoteId]);
 
