@@ -26,7 +26,7 @@ import {
 import { forwardRef } from "react";
 
 const MarkDownEditor = forwardRef(function MarkDownEditor(
-  { content, debouncedHandleEditContent },
+  { content, handleEditContent },
   ref,
 ) {
   return (
@@ -34,7 +34,7 @@ const MarkDownEditor = forwardRef(function MarkDownEditor(
       <MDXEditor
         ref={ref}
         markdown={content}
-        onChange={debouncedHandleEditContent}
+        onBlur={handleEditContent}
         onError={console.log}
         plugins={[
           headingsPlugin(),
