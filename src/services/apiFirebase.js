@@ -203,7 +203,7 @@ export async function getContent(noteId) {
       createdAt,
       encrypted,
       audioId,
-      textValue: newStrAfterAudioId,
+      textValue: newStrAfterAudioId.slice(0, -2),
     };
 
     return noteObject;
