@@ -240,6 +240,7 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
         handleUpdateEditContent={handleUpdateEditContent}
         handleUpdateSelectContent={handleUpdateSelectContent}
         handleAddNewAudioTextContent={handleAddNewAudioTextContent}
+        isEditing={isEditing}
       />
     </>
   );

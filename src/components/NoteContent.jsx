@@ -10,6 +10,7 @@ function NoteContent({
   handleUpdateEditContent,
   handleUpdateSelectContent,
   handleAddNewAudioTextContent,
+  isEditing,
 }) {
   const bottomRef = useRef(null);
 
@@ -53,6 +54,7 @@ function NoteContent({
               handleUpdateEncryptContent={handleUpdateEncryptContent}
               handleUpdateEditContent={handleUpdateEditContent}
               handleUpdateSelectContent={handleUpdateSelectContent}
+              isEditing={isEditing}
             />
           );
         }
