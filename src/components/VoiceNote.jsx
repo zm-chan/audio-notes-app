@@ -8,16 +8,18 @@ function VoiceNote({ handleUpdateSelectContent, eachContent }) {
   // console.log(eachContent);
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex flex-col gap-3 xs:flex-row xs:items-center">
       <SelectButton
         selected={eachContent.selected}
         onClick={handleSelectAudio}
       />
 
       {eachContent.audioUrl && (
-        <div>
-          <audio controls src={eachContent.audioUrl} />
-        </div>
+        <audio
+          controls
+          src={eachContent.audioUrl}
+          className="w-full max-w-xs"
+        />
       )}
     </div>
   );
