@@ -3,7 +3,7 @@ import Sidebar from "@/components/Sidebar";
 import SidebarButtonsRow from "@/components/SidebarButtonsRow";
 import NoteList from "@/components/NoteList";
 import { useSelectedNote } from "@/context/SelectedNoteContext";
-import { Toaster } from "@/components/ui/toaster";
+
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -58,7 +58,6 @@ function AppLayout() {
           handleToggleSidebar={handleToggleSidebar}
         />
       </main>
-      <Toaster />
     </>
   );
 }

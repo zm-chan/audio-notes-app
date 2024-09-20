@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import ErrorElement from "./pages/ErrorElement";
 
 import ProtectedRoute from "./components/ProtectedRoute";
+import { Toaster } from "./components/ui/toaster";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ function App() {
   return (
     <AuthContextProvider>
       <RouterProvider router={router} />
+      <Toaster />
     </AuthContextProvider>
   );
 }
