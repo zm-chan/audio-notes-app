@@ -201,7 +201,7 @@ export async function getContent(noteId) {
     const noteObject = {
       id,
       createdAt,
-      encrypted,
+      encrypted: Boolean(false),
       audioId,
       textValue: newStrAfterAudioId.slice(0, -2),
     };
