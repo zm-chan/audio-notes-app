@@ -14,8 +14,6 @@ function VoiceSetup({
   const {
     isRecording,
     doneRecording,
-    audioUrl,
-    audioFile,
     transcript,
     interimScript,
     startRecording,
@@ -24,22 +22,10 @@ function VoiceSetup({
   } = useVoiceNote(selectedLanguage);
 
   useEffect(() => {
-    if (audioUrl && audioFile && doneRecording) {
-      handleAddNewAudioTextContent(
-        eachContent.id,
-        audioUrl,
-        audioFile,
-        transcript,
-      );
+    if (doneRecording) {
+      handleAddNewAudioTextContent(eachContent.id, transcript);
     }
-  }, [
-    audioUrl,
-    audioFile,
-    handleAddNewAudioTextContent,
-    eachContent.id,
-    transcript,
-    doneRecording,
-  ]);
+  }, [handleAddNewAudioTextContent, eachContent.id, transcript, doneRecording]);
 
   function handleSelectAudio() {
     handleUpdateSelectContent(eachContent.id);

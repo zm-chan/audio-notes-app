@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import TextNote from "./TextNote";
-import VoiceNote from "./VoiceNote";
 import VoiceSetup from "./VoiceSetup";
 import { useSelectedNote } from "@/context/SelectedNoteContext";
 
@@ -29,15 +28,7 @@ function NoteContent({
   return (
     <div className="flex flex-col gap-9 px-4 py-2">
       {sortedTemperoraryContent.map((eachContent) => {
-        if (eachContent.type === "audio" && eachContent.recorded) {
-          return (
-            <VoiceNote
-              key={eachContent.id}
-              eachContent={eachContent}
-              handleUpdateSelectContent={handleUpdateSelectContent}
-            />
-          );
-        } else if (eachContent.type === "audio" && !eachContent.recorded) {
+        if (eachContent.type === "audio") {
           return (
             <VoiceSetup
               key={eachContent.id}

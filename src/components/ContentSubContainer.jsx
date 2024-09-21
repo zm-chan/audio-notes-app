@@ -20,59 +20,47 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
 
   function handleAddNewAudioContent() {
     // console.log("handleAddNewAudioContent");
-    // console.log(checkAudioSupport());
-    if (!checkAudioSupport()) {
+    // console.log(Boolean(checkAudioSupport()));
+
+    try {
+      if (checkAudioSupport()) {
+        editedRef.current = true;
+        setTemperoraryContent((previousTemperoraryContent) => {
+          const createdAt = Date.now();
+          return [
+            ...previousTemperoraryContent,
+            {
+              id: createdAt,
+              createdAt: createdAt,
+              type: "audio",
+              selected: false,
+            },
+          ];
+        });
+      }
+    } catch (error) {
       toast({
         title: "Error",
         description: "Your browser has no support of audio",
-      });
-    } else {
-      editedRef.current = true;
-      setTemperoraryContent((previousTemperoraryContent) => {
-        const createdAt = Date.now();
-        return [
-          ...previousTemperoraryContent,
-          {
-            id: createdAt,
-            createdAt: createdAt,
-            type: "audio",
-            selected: false,
-            recorded: false,
-          },
-        ];
       });
     }
   }
 
   const handleAddNewAudioTextContent = useCallback(
-    function handleAddNewAudioTextContent(
-      contentId,
-      audioUrl,
-      audioFile,
-      transcript,
-    ) {
+    function handleAddNewAudioTextContent(contentId, transcript) {
       // console.log("handleAddNewAudioTextContent");
       editedRef.current = true;
       setTemperoraryContent((previousTemperoraryContent) => {
-        const addedAudioContent = previousTemperoraryContent.map(
+        const removedVoiceSetup = previousTemperoraryContent.filter(
           (eachContent) => {
-            if (eachContent.id === contentId) {
-              return {
-                ...eachContent,
-                audioUrl: audioUrl,
-                audioFile: audioFile,
-                recorded: true,
-              };
-            } else {
-              return eachContent;
-            }
+            return eachContent.id !== contentId;
           },
         );
 
         const createdAt = Date.now();
 
-        const addedAudioTextContent = [
-          ...addedAudioContent,
+        const addedTextContentFromAudio = [
+          ...removedVoiceSetup,
           {
             id: createdAt,
             createdAt: createdAt,
@@ -80,11 +68,10 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
             selected: false,
             encrypted: false,
             textValue: transcript,
-            audioId: contentId,
           },
         ];
 
-        return addedAudioTextContent;
+        return addedTextContentFromAudio;
       });
     },
     [editedRef],
@@ -104,7 +91,6 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
           selected: false,
           encrypted: false,
           textValue: "",
-          audioId: null,
         },
       ];
     });
@@ -123,29 +109,11 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
       return;
     }
 
-    const removeSelectedContent = temperoraryContent.filter((eachContent) => {
+    const removedSelectedContent = temperoraryContent.filter((eachContent) => {
       return eachContent.selected !== true;
     });
 
-    // revoke audioUrl
-    temperoraryContent.forEach((eachContent) => {
-      if (eachContent.type === "audio" && eachContent.audioUrl) {
-        return URL.revokeObjectURL(eachContent.audioUrl);
-      }
-    });
-
-    // remove audio and text content link
-    const removeAudioLinkedTextContent = removeSelectedContent.map(
-      (eachContent) => {
-        if (eachContent.type === "text" && eachContent.audioId) {
-          return { ...eachContent, audioId: null };
-        } else {
-          return eachContent;
-        }
-      },
-    );
-
-    setTemperoraryContent(removeAudioLinkedTextContent);
+    setTemperoraryContent(removedSelectedContent);
   }
 
   function handleUpdateSelectContent(contentId) {
@@ -201,7 +169,7 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
 
   function handleSaveContent() {
     const containsVoiceSetup = temperoraryContent.some((eachContent) => {
-      return eachContent.type === "audio" && eachContent.recorded === false;
+      return eachContent.type === "audio";
     });
 
     if (containsVoiceSetup) {

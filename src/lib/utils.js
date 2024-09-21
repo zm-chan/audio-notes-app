@@ -75,13 +75,8 @@ export function checkAudioSupport() {
   // Check for support
   const hasSpeechRecognitionSupport =
     window.SpeechRecognition || window.webkitSpeechRecognition;
-  const hasGetUserMediaSupport =
-    navigator.mediaDevices.getUserMedia ||
-    navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia;
-  const hasAudioSupport = hasSpeechRecognitionSupport && hasGetUserMediaSupport;
 
-  return hasAudioSupport;
+  return hasSpeechRecognitionSupport;
 }
 
 export function encryptContent(secretKey, content) {
