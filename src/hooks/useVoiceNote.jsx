@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useToast } from "./use-toast";
+import useWindowWidth from "./useWindowWidth";
 
 function punctuationReplacement(language, transcript) {
   if (language === "en-GB") {
@@ -46,6 +47,7 @@ function useVoiceNote(language) {
   const recognitionRef = useRef(null);
 
   const { toast } = useToast();
+  const isMobile = useWindowWidth(1280);
 
   // console.log(transcript, interimScript);
 
@@ -54,7 +56,8 @@ function useVoiceNote(language) {
     recognitionRef.current = new (window.SpeechRecognition ||
       window.webkitSpeechRecognition)();
     recognitionRef.current.interimResults = true;
-    recognitionRef.current.continuous = true;
+    // Somehow continuous makes every results .final is true
+    recognitionRef.current.continuous = isMobile ? false : true;
     recognitionRef.current.lang = language;
 
     recognitionRef.current.onresult = (event) => {
@@ -62,6 +65,12 @@ function useVoiceNote(language) {
       let interimScript = "";
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcript = event.results[i][0].transcript;
+
+        // Somehow for Chinese language, there's empty transcript being returned
+        if (transcript.length === 0) {
+          break;
+        }
+
         if (event.results[i].isFinal) {
           setTranscript((prevTranscript) => {
             return punctuationReplacement(
@@ -85,7 +94,7 @@ function useVoiceNote(language) {
         recognitionRef.current.onresult = null;
       }
     };
-  }, [language, toast]);
+  }, [language, toast, isMobile]);
 
   const startRecording = () => {
     if (!recognitionRef.current) {
