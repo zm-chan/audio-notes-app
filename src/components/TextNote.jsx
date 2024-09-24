@@ -54,7 +54,7 @@ function TextNote({
       </div>
 
       <MarkDownEditor
-        key={Date.now()}
+        key={eachContent.id}
         ref={markdownRef}
         content={eachContent.textValue}
         handleEditContent={handleEditContent}
