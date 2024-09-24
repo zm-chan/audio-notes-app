@@ -24,7 +24,7 @@ function ErrorElement() {
   }
 
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-zinc-800">
+    <div className="flex min-h-svh items-center justify-center bg-zinc-800">
       <div className="space-y-4 text-center">
         <h1 className="text-2xl font-semibold text-zinc-300 lg:text-4xl">
           {title}

@@ -25,7 +25,7 @@ function NoteContent({
 
   return (
     <>
-      <div className="flex h-[calc(100vh-56px)] flex-col gap-9 overflow-scroll p-4">
+      <div className="flex h-[calc(100svh-56px)] flex-col gap-9 overflow-scroll p-4">
         {temperoraryContent.map((eachContent) => {
           if (eachContent.type === "audio") {
             return (
