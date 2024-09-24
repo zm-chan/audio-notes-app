@@ -1,6 +1,6 @@
 import ContentActionsRow from "./ContentActionsRow";
 import NoteContent from "./NoteContent";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useSelectedNote } from "@/context/SelectedNoteContext";
 import useSaveNoteContent from "@/hooks/useSaveNoteContent";
 import { checkAudioSupport } from "@/lib/utils";
@@ -17,6 +17,8 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
   const { isEditing, editNoteContent } = useSaveNoteContent();
 
   const { toast } = useToast();
+
+  const newNoteRef = useRef("");
 
   function handleAddNewAudioContent() {
     // console.log("handleAddNewAudioContent");
@@ -80,8 +82,8 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
   function handleAddNewTextContent() {
     // console.log("handleAddNewTextContent");
     editedRef.current = true;
+    const createdAt = Date.now();
     setTemperoraryContent((previousTemperoraryContent) => {
-      const createdAt = Date.now();
       return [
         ...previousTemperoraryContent,
         {
@@ -94,6 +96,7 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
         },
       ];
     });
+    newNoteRef.current = createdAt;
   }
 
   function handleDeleteContent() {
@@ -147,6 +150,10 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
         }
       });
     });
+
+    if (contentId === newNoteRef.current) {
+      newNoteRef.current = "";
+    }
   }
 
   function handleUpdateEncryptContent(contentId, content) {
@@ -210,6 +217,7 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
         handleUpdateSelectContent={handleUpdateSelectContent}
         handleAddNewAudioTextContent={handleAddNewAudioTextContent}
         isEditing={isEditing}
+        newNoteReference={newNoteRef.current}
       />
       <ScrollToTopButton />
     </>

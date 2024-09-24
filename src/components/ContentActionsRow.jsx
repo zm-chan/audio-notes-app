@@ -23,7 +23,7 @@ function ContentActionsRow({
   isEditing,
 }) {
   return (
-    <div className="sticky top-0 z-10 flex items-center justify-between gap-6 bg-zinc-800 px-4 py-2">
+    <div className="flex items-center justify-between gap-6 bg-zinc-800 px-4 py-2">
       <div className="flex grow">
         <SidebarToggleButton
           onClick={handleToggleSidebar}

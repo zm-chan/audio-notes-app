@@ -37,10 +37,10 @@ function AppLayout() {
 
   return (
     <>
-      <main className="grid h-svh grid-cols-[auto_auto] overflow-hidden sm:grid-cols-[auto_1fr]">
+      <main className="grid h-svh grid-cols-[auto_100vw] overflow-hidden sm:grid-cols-[auto_calc(100vw-320px)]">
         <Sidebar
           className={cn(
-            "-ml-64 w-64 border-r bg-zinc-900 transition-all duration-300 ease-in-out xs:-ml-80 xs:w-80 sm:ml-0 sm:w-80",
+            "-ml-64 w-64 border-r bg-zinc-900 transition-all duration-300 ease-in-out xs:-ml-80 xs:w-80 sm:ml-0",
             {
               "!ml-0": toggleSidebar,
             },
@@ -53,7 +53,7 @@ function AppLayout() {
           />
         </Sidebar>
         <Content
-          className="w-screen bg-zinc-800 sm:w-auto"
+          className="bg-zinc-800"
           selectedNoteId={selectedNoteId}
           handleToggleSidebar={handleToggleSidebar}
         />

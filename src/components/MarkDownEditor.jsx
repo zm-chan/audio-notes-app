@@ -90,7 +90,7 @@ const MarkDownEditor = forwardRef(function MarkDownEditor(
             },
           }),
         ]}
-        className="[&_div.mdxeditor-toolbar]:rounded-b-none"
+        className="[&_div.mdxeditor-toolbar]:-top-4 [&_div.mdxeditor-toolbar]:rounded-b-none"
         contentEditableClassName="bg-zinc-600 rounded-b prose prose-invert font-['Poppins'] max-w-none"
       />
     </>

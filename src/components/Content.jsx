@@ -25,7 +25,7 @@ function Content({ className, selectedNoteId, handleToggleSidebar }) {
   }
 
   return (
-    <div className={twMerge("overflow-auto", className)} id="contentIdentifier">
+    <div className={className} id="contentIdentifier">
       {content}
     </div>
   );
