@@ -23,11 +23,7 @@ function Content({ className, selectedNoteId, handleToggleSidebar }) {
     );
   }
 
-  return (
-    <div className={className} id="contentIdentifier">
-      {content}
-    </div>
-  );
+  return <div className={className}>{content}</div>;
 }
 
 export default Content;
