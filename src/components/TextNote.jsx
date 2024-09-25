@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MarkDownEditor from "./MarkDownEditor";
 import EncryptionDialog from "./EncryptionDialog";
 import { decryptContent, encryptContent } from "@/lib/utils";
@@ -35,6 +35,10 @@ function TextNote({
   function handleSelectContent() {
     handleUpdateSelectContent(eachContent.id);
   }
+
+  useEffect(() => {
+    markdownRef.current.setMarkdown(eachContent.textValue);
+  }, [eachContent.textValue]);
 
   return (
     <div className="flex flex-col gap-3">
