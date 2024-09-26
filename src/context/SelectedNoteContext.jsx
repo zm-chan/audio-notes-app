@@ -8,7 +8,10 @@ export function SelectedNoteContextProvider({ children }) {
 
   function selectNote(noteId) {
     if (editedRef.current) {
-      if (window.confirm("Have you saved the note before leaving?")) {
+      if (
+        noteId !== selectedNoteId &&
+        window.confirm("Have you saved the note before leaving?")
+      ) {
         editedRef.current = null;
         setSelectedNoteId(noteId);
       }

@@ -15,7 +15,6 @@ function NoteContent({
 
   useEffect(() => {
     if (bottomRef.current && newNoteReference) {
-      console.log("here");
       bottomRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [newNoteReference]);
