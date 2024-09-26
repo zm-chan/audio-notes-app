@@ -24,6 +24,9 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
     // console.log("handleAddNewAudioContent");
     // console.log(Boolean(checkAudioSupport()));
 
+    editedRef.current = true;
+    newNoteRef.current = "";
+
     try {
       if (checkAudioSupport()) {
         editedRef.current = true;
@@ -52,6 +55,7 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
     function handleAddNewAudioTextContent(contentId, transcript) {
       // console.log("handleAddNewAudioTextContent");
       editedRef.current = true;
+      newNoteRef.current = "";
       setTemperoraryContent((previousTemperoraryContent) => {
         const removedVoiceSetup = previousTemperoraryContent.filter(
           (eachContent) => {
@@ -102,6 +106,7 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
   function handleDeleteContent() {
     // console.log("handleDeleteContent");
     editedRef.current = true;
+    newNoteRef.current = "";
     const selectedContent = temperoraryContent.some((eachContent) => {
       return eachContent.selected === true;
     });
@@ -121,6 +126,7 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
 
   function handleUpdateSelectContent(contentId) {
     // console.log("handleUpdateSelectContent");
+    newNoteRef.current = "";
     setTemperoraryContent((prevTemperoraryContent) => {
       return prevTemperoraryContent.map((eachContent) => {
         if (eachContent.id === contentId) {
@@ -138,6 +144,7 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
   function handleUpdateEditContent(contentId, content) {
     // console.log("handleUpdateEditContent");
     editedRef.current = true;
+    newNoteRef.current = "";
     setTemperoraryContent((prevTemperoraryContent) => {
       return prevTemperoraryContent.map((eachContent) => {
         if (eachContent.id === contentId) {
@@ -150,15 +157,12 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
         }
       });
     });
-
-    if (contentId === newNoteRef.current) {
-      newNoteRef.current = "";
-    }
   }
 
   function handleUpdateEncryptContent(contentId, content) {
     // console.log("handleUpdateEncryptContent");
     editedRef.current = true;
+    newNoteRef.current = "";
     setTemperoraryContent((prevTemperoraryContent) => {
       return prevTemperoraryContent.map((eachContent) => {
         if (eachContent.id === contentId) {
@@ -191,6 +195,7 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
       {
         onSuccess: () => {
           editedRef.current = false;
+          newNoteRef.current = "";
         },
         onError: (error) =>
           toast({ title: error.name, description: error.message }),
