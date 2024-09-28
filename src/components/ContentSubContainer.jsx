@@ -25,13 +25,12 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
     // console.log(Boolean(checkAudioSupport()));
 
     editedRef.current = true;
-    newNoteRef.current = "";
 
     try {
       if (checkAudioSupport()) {
         editedRef.current = true;
+        const createdAt = Date.now();
         setTemperoraryContent((previousTemperoraryContent) => {
-          const createdAt = Date.now();
           return [
             ...previousTemperoraryContent,
             {
@@ -42,6 +41,7 @@ function ContentSubContainer({ noteContent, handleToggleSidebar }) {
             },
           ];
         });
+        newNoteRef.current = createdAt;
       }
     } catch (error) {
       toast({
