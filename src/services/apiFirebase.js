@@ -173,7 +173,7 @@ export async function getContent(noteId) {
     const noteObject = {
       id,
       createdAt,
-      encrypted: Boolean(encrypted),
+      encrypted: encrypted === "true" ? true : false,
       textValue: newStrAfterEncrypted.slice(0, -2),
     };
 
