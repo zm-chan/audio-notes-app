@@ -8,6 +8,8 @@ import {
   codeMirrorPlugin,
   CodeToggle,
   ConditionalContents,
+  diffSourcePlugin,
+  DiffSourceToggleWrapper,
   headingsPlugin,
   InsertCodeBlock,
   InsertTable,
@@ -37,6 +39,10 @@ const MarkDownEditor = forwardRef(function MarkDownEditor(
         onBlur={handleEditContent}
         onError={console.log}
         plugins={[
+          diffSourcePlugin({
+            viewMode: "rich-text",
+            readOnlyDiff: true,
+          }),
           headingsPlugin(),
           quotePlugin(),
           tablePlugin(),
@@ -85,6 +91,7 @@ const MarkDownEditor = forwardRef(function MarkDownEditor(
                       },
                     ]}
                   />
+                  <DiffSourceToggleWrapper />
                 </>
               );
             },
