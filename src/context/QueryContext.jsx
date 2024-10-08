@@ -148,6 +148,11 @@ export function useBaseQuery({
 
         if (hasTags && !refetch) {
           setData(currentCacheData);
+          setQueryCache({
+            tags: queryKeyRef.current,
+            data: currentCacheData,
+            refetchFunction: setRefetch,
+          });
           return setIsStartOperating(false);
         }
 
